@@ -1,9 +1,0 @@
-Dataset: CICY3 (original)
-
-- arxiv: 1003.3235
-- authors: P. Candelas, A.M. Dale, C.A. Lutken, R. Schimmrigk, P.S. Green, T. Hubsch, V. Braun
-- size: 7890
-- orig_url: http://www-thphys.physics.ox.ac.uk/projects/CalabiYau/cicylist/cicylist.m
-- filename: cicy3o
-- datapath: /mnt/data/Documents/Projets/Recherche/Packages/stringdata/data
-- columns: ['id', 'h11', 'h21', 'c2', 'matrix', 'size', 'redun']

@@ -1,9 +1,0 @@
-Dataset: CICY3 (favorable)
-
-- arxiv: 1708.07907
-- authors: Lara B. Anderson, Xin Gao, James Gray, Seung-Joo Lee
-- size: 7890
-- orig_url: http://www1.phys.vt.edu/cicydata/favourcicylist.m
-- filename: cicy3f
-- datapath: /mnt/data/Documents/Projets/Recherche/Packages/stringdata/data
-- columns: ['id', 'h11', 'h21', 'c2', 'matrix', 'size', 'favour', 'kahlerpos', 'isprod']
