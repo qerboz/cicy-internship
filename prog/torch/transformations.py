@@ -5,7 +5,7 @@ Data transformations:
 '''
 
 import torch
-from torch_geometric.utils import degree
+from torch_geometric.transforms import BaseTransform
 
 def max_filter(val,label=None):
     if label is None:
@@ -17,15 +17,13 @@ def min_filter(val,label=None):
         return lambda graph: graph.y >= val
     return lambda graph: graph.y[label] >= val
 
-def label_selection(label):
-    def select(graph):
-        if label == 'both':
+class LabelSelection(BaseTransform):
+    def __init__(self,label):
+        self.label = label
+
+    def __call__(self,graph):
+        if self.label == 'both':
             graph.y = torch.tensor([graph.y['h11'],graph.y['h21']],dtype=torch.int)
         else:
-            graph.y = graph.y[label]
+            graph.y = graph.y[self.label]
         return graph
-    return select
-
-def node_degree(graph):
-    nodes_degrees = degree(graph)
-

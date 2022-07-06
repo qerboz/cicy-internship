@@ -119,9 +119,8 @@ class OriginalCICY3(pyg.data.InMemoryDataset):
 
     def pre_transform_func(self,graph):
         if isinstance(self.pre_transform,list):
-            for transform in self.pre_transform:
-                graph = transform(graph)
-            return graph
+            transform = pyg.transforms.Compose(self.pre_transform)
+            return transform(graph)
         return self.pre_transform(graph)
 
     @property
