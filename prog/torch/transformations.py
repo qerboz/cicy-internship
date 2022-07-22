@@ -27,3 +27,18 @@ class LabelSelection(BaseTransform):
         else:
             graph.y = graph.y[self.label]
         return graph
+
+class EdgeEnhancing(BaseTransform):
+    def __call__(self,graph):
+        new_features = torch.empty((0,10),dtype=torch.float)
+        for i in range(graph.edge_index.shape[1]):
+            node_features = torch.cat((graph.x[graph.edge_index[0,i],2:],
+                                       graph.x[graph.edge_index[1,i],2:]))
+            node_features = torch.unsqueeze(node_features,dim=0)
+            new_features = torch.cat((new_features,node_features))
+        edge_attr = torch.cat((graph.edge_attr,new_features),dim=1)
+        graph.edge_attr = edge_attr
+        return graph
+
+def accuracy(prediction,target):
+    return torch.mean(torch.eq(torch.round(prediction),torch.round(target)).type(torch.float))

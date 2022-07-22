@@ -21,13 +21,13 @@ def mat_to_graph(matrices):
             for j in range(columns):
                 if matrices[i][j] > 0:
                     edges_list += [[i,rows+j],[rows+j,i]]
-                    edges_features += [matrices[i][j]]*2
+                    edges_features += [[matrices[i][j]]]*2
         edges_nb = len(edges_list)/2
-        edges_list = torch.transpose(torch.tensor(edges_list,dtype=torch.int),0,1)
+        edges_list = torch.transpose(torch.tensor(edges_list,dtype=torch.int64),0,1)
         edges_features = torch.tensor(edges_features,dtype=torch.float)
         sparse_adj = torch.sparse_coo_tensor(edges_list,torch.tensor([1]*len(edges_features)),
                                              size=(nodes_nb,nodes_nb))
-        mod_sparse_adj = torch.sparse_coo_tensor(edges_list,edges_features,
+        mod_sparse_adj = torch.sparse_coo_tensor(edges_list,torch.squeeze(edges_features),
                                                  size=(nodes_nb,nodes_nb))
         return {'nodes':nodes_features,'edges_list':edges_list,
                 'edges_features':edges_features,'adj_mat':sparse_adj,
